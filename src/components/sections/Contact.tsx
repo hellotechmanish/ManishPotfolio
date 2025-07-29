@@ -34,7 +34,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -42,7 +42,7 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -51,7 +51,7 @@ export default function Contact() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
       // setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
-    } catch (error) {
+    } catch {
       // setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -161,13 +161,13 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
+          <form className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100" onSubmit={handleSubmit}>
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
                 Send a Message
               </h3>
               <p className="text-gray-600">
-                Fill out the form below and I'll get back to you soon.
+                Fill out the form below and I&apos;ll get back to you soon.
               </p>
             </div>
 
@@ -253,7 +253,7 @@ export default function Contact() {
                 <div className="flex items-center space-x-2 text-green-600 bg-green-50 p-4 rounded-xl border border-green-200">
                   <CheckCircle className="w-5 h-5" />
                   <span className="font-medium">
-                    Message sent successfully! I'll get back to you soon.
+                    Message sent successfully! I&apos;ll get back to you soon.
                   </span>
                 </div>
               )}
@@ -281,7 +281,7 @@ export default function Contact() {
                 <span>{contactData.email}</span>
               </a>
             </div>
-          </div>
+          </form>
         </div>
 
         {/* Bottom CTA */}
@@ -291,7 +291,7 @@ export default function Contact() {
               Ready to Start Your Project?
             </h3>
             <p className="text-gray-300 mb-6">
-              Let's discuss your ideas and turn them into reality. No project is
+              Let&apos;s discuss your ideas and turn them into reality. No project is
               too big or too small.
             </p>
             <div className="flex flex-wrap justify-center gap-4">

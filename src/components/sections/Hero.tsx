@@ -12,6 +12,7 @@ import {
   Palette,
   Briefcase,
 } from "lucide-react";
+import Image from 'next/image';
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +34,7 @@ export default function Hero() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   return (
     <section
@@ -55,15 +56,14 @@ export default function Hero() {
       <div className="relative z-10 w-full py-20 grid grid-cols-1 lg:grid-cols-2 items-center gap-10 px-6 md:px-20 min-h-screen">
         {/* Left Section */}
         <div
-          className={`text-center lg:text-left space-y-8 transform transition-all duration-1000 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
+          className={`text-center lg:text-left space-y-8 transform transition-all duration-1000 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
         >
           {/* Greeting with icon */}
           <div className="flex items-center gap-2 justify-center lg:justify-start">
             <Sparkles className="w-6 h-6 text-yellow-500 animate-pulse" />
             <span className="text-lg text-gray-600 font-medium">
-              Hello, I'm
+              Hello, I&apos;m
             </span>
           </div>
 
@@ -84,13 +84,12 @@ export default function Hero() {
                   {roles.map((role, index) => (
                     <span
                       key={role}
-                      className={`absolute inset-0 transform transition-all duration-500 ${
-                        index === currentRole
+                      className={`absolute inset-0 transform transition-all duration-500 ${index === currentRole
                           ? "translate-y-0 opacity-100"
                           : index < currentRole
-                          ? "-translate-y-full opacity-0"
-                          : "translate-y-full opacity-0"
-                      }`}
+                            ? "-translate-y-full opacity-0"
+                            : "translate-y-full opacity-0"
+                        }`}
                     >
                       {role}
                     </span>
@@ -104,7 +103,7 @@ export default function Hero() {
           {/* Description */}
           <p className="text-lg text-gray-600 max-w-lg mx-auto lg:mx-0 leading-relaxed">
             Passionate about creating beautiful, functional, and user-friendly
-            digital experiences. Let's bring your ideas to life with modern web
+            digital experiences. Let&apos;s bring your ideas to life with modern web
             technologies.
           </p>
 
@@ -131,7 +130,7 @@ export default function Hero() {
               className="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
             >
               <Mail className="w-5 h-5 group-hover:animate-bounce" />
-              Let's Connect
+              Let&apos;s Connect
             </a>
 
             <a
@@ -173,9 +172,8 @@ export default function Hero() {
 
         {/* Right Section */}
         <div
-          className={`flex justify-center lg:justify-end transform transition-all duration-1000 delay-300 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
+          className={`flex justify-center lg:justify-end transform transition-all duration-1000 delay-300 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
         >
           <div className="relative group">
             {/* Decorative rings */}
@@ -185,10 +183,9 @@ export default function Hero() {
             {/* Profile image container */}
             <div className="relative bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-1 rounded-full group-hover:scale-105 transition-transform duration-500">
               <div className="bg-white p-2 rounded-full">
-                <img
+                <Image
                   className="rounded-full w-72 h-72 md:w-96 md:h-96 object-cover shadow-2xl group-hover:scale-105 transition-transform duration-500"
-                  src="About_me_img1.png"
-                  // public\About_me_img2.png
+                  src="/About_me_img1.png"
                   alt="Manish Kumar - Full Stack Developer"
                 />
               </div>

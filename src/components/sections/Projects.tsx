@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { 
-  ExternalLink, 
-  Github, 
-  Star, 
+import {
+  ExternalLink,
+  Github,
+  Star,
   Award,
   Heart,
   Eye,
@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight
 } from 'lucide-react';
+import Image from 'next/image';
 
 // TypeScript interfaces for better type safety
 interface ProjectLink {
@@ -169,7 +170,7 @@ const Projects = () => {
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
+  const [isAutoPlaying] = useState<boolean>(true);
 
   const featuredProjects: Project[] = projectsData.projects.filter((p: Project) => p.featured);
 
@@ -200,12 +201,11 @@ const Projects = () => {
           className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
+
         {/* Status Badge */}
         <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-            project.status === 'Live' ? 'bg-green-500 text-white' : 'bg-orange-500 text-white'
-          }`}>
+          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${project.status === 'Live' ? 'bg-green-500 text-white' : 'bg-orange-500 text-white'
+            }`}>
             {project.status}
           </span>
         </div>
@@ -340,7 +340,7 @@ const Projects = () => {
           <h3 className="text-3xl font-bold text-center mb-8 text-gray-900">Featured Projects</h3>
           <div className="relative">
             <div className="overflow-hidden rounded-3xl">
-              <div 
+              <div
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
@@ -368,7 +368,7 @@ const Projects = () => {
                           <p className="text-gray-600 mb-6 text-lg leading-relaxed">
                             {project.longDescription}
                           </p>
-                          
+
                           {/* Technologies */}
                           <div className="flex flex-wrap gap-2 mb-6">
                             {project.technologies.map((tech: string, index: number) => (
@@ -429,9 +429,8 @@ const Projects = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    currentSlide === index ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-all ${currentSlide === index ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
                 />
               ))}
             </div>
@@ -454,7 +453,7 @@ const Projects = () => {
             <Heart className="w-12 h-12 mx-auto mb-6 text-pink-300" />
             <h3 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h3>
             <p className="text-blue-100 mb-8 text-lg max-w-2xl mx-auto">
-              Let's work together to create something amazing. I'm passionate about turning your ideas into reality.
+              Let&apos;s work together to create something amazing. I&apos;m passionate about turning your ideas into reality.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
@@ -489,7 +488,7 @@ const Projects = () => {
                   ×
                 </button>
               </div>
-              <img
+              <Image
                 src={selectedProject.image}
                 alt={selectedProject.title}
                 className="w-full h-64 object-cover rounded-xl mb-6"
@@ -497,7 +496,7 @@ const Projects = () => {
               <p className="text-gray-600 mb-6 text-lg leading-relaxed">
                 {selectedProject.longDescription}
               </p>
-              
+
               {/* Technologies */}
               <div className="mb-6">
                 <h4 className="font-semibold text-gray-900 mb-3">Technologies Used</h4>

@@ -1,11 +1,10 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { 
-  Code2, 
-  Palette, 
-  Smartphone, 
-  Globe, 
-  Database, 
+import {
+  Code2,
+  Palette,
+  Smartphone,
+  Globe,
   Zap,
   ArrowRight,
   Check,
@@ -15,11 +14,10 @@ import {
   TrendingUp,
   Layers,
   Settings,
-  Brush,
   ShoppingCart,
-  Search,
-  Shield
+  Search
 } from 'lucide-react';
+import Image from 'next/image';
 
 const services = [
   {
@@ -168,12 +166,11 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section id='#services' className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
         <div className="container mx-auto px-6 relative">
-          <div className={`text-center max-w-4xl mx-auto transform transition-all duration-1000 ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
+          <div className={`text-center max-w-4xl mx-auto transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}>
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />
               Professional Services
@@ -184,10 +181,10 @@ export default function ServicesPage() {
             <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               From concept to deployment, I provide comprehensive digital solutions that help businesses grow and succeed in the modern web landscape.
             </p>
-            
+
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-              {stats.map((stat, index) => (
+              {stats.map((stat) => (
                 <div key={stat.label} className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-sm border">
                   <stat.icon className="w-8 h-8 text-blue-600 mx-auto mb-2" />
                   <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
@@ -203,30 +200,28 @@ export default function ServicesPage() {
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {services.map((service, index) => (
+            {services.map((service) => (
               <div
                 key={service.id}
                 onClick={() => setSelectedService(service)}
-                className={`group relative bg-white rounded-2xl p-8 shadow-sm border hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:scale-105 ${
-                  selectedService.id === service.id ? 'ring-2 ring-blue-500 shadow-xl scale-105' : ''
-                }`}
+                className={`group relative bg-white rounded-2xl p-8 shadow-sm border hover:shadow-xl transition-all duration-500 cursor-pointer transform hover:scale-105 ${selectedService.id === service.id ? 'ring-2 ring-blue-500 shadow-xl scale-105' : ''
+                  }`}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${service.bgColor} opacity-0 group-hover:opacity-50 rounded-2xl transition-opacity duration-300`}></div>
-                
+
                 <div className="relative z-10">
                   <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${service.color} mb-6`}>
                     <service.icon className="w-8 h-8 text-white" />
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
                   <p className="text-blue-600 font-semibold mb-4">{service.subtitle}</p>
                   <p className="text-gray-600 mb-6">{service.description}</p>
-                  
+
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-gray-900">{service.pricing}</span>
-                    <ArrowRight className={`w-5 h-5 transform transition-transform group-hover:translate-x-1 ${
-                      selectedService.id === service.id ? 'text-blue-600' : 'text-gray-400'
-                    }`} />
+                    <ArrowRight className={`w-5 h-5 transform transition-transform group-hover:translate-x-1 ${selectedService.id === service.id ? 'text-blue-600' : 'text-gray-400'
+                      }`} />
                   </div>
                 </div>
               </div>
@@ -238,10 +233,12 @@ export default function ServicesPage() {
             <div className="grid lg:grid-cols-2 gap-0">
               {/* Left: Image */}
               <div className="relative h-64 lg:h-full">
-                <img
+                <Image
                   src={selectedService.image}
                   alt={selectedService.title}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  style={{ objectFit: 'cover' }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute bottom-6 left-6">
@@ -259,10 +256,10 @@ export default function ServicesPage() {
                 <div className="space-y-8">
                   {/* Features */}
                   <div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">What's Included:</h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">What&apos;s Included:</h3>
                     <div className="grid gap-3">
-                      {selectedService.features.map((feature, index) => (
-                        <div key={index} className="flex items-center gap-3">
+                      {selectedService.features.map((feature) => (
+                        <div key={feature} className="flex items-center gap-3">
                           <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
                           <span className="text-gray-700">{feature}</span>
                         </div>
@@ -274,9 +271,9 @@ export default function ServicesPage() {
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900 mb-4">Technologies Used:</h3>
                     <div className="flex flex-wrap gap-2">
-                      {selectedService.technologies.map((tech, index) => (
+                      {selectedService.technologies.map((tech) => (
                         <span
-                          key={index}
+                          key={tech}
                           className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
                         >
                           {tech}
@@ -344,5 +341,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      </div>
-  )}
+    </div>
+  )
+}
