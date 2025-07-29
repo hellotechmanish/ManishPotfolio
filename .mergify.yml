@@ -1,0 +1,10 @@
+pull_request_rules:
+  - name: "Auto-merge dev to main when label is added"
+    conditions:
+      - base=main
+      - head=dev
+      - status-success=Dev Branch - Build & Test
+      - label=merge-when-ready
+    actions:
+      merge:
+        method: squash

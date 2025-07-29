@@ -37,3 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 ci/cd integraction setup with vercel
+mergyfy setup know will merge automaticaly whaen dev job pass
