@@ -161,12 +161,12 @@ export default function Hero() {
             >
               <Linkedin className="w-5 h-5 text-gray-700 group-hover:text-blue-600" />
             </a>
-            <a
+            {/* <a
               href="mailto:manish@example.com"
               className="group p-3 bg-white/80 backdrop-blur-sm rounded-full shadow-sm border hover:shadow-md hover:scale-110 transition-all duration-300"
             >
               <Mail className="w-5 h-5 text-gray-700 group-hover:text-red-500" />
-            </a>
+            </a> */}
           </div>
         </div>
 

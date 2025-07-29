@@ -40,3 +40,4 @@ ci/cd integraction setup with vercel
 mergyfy setup know will merge automaticaly whaen dev job pass
 
 // This is a test change to trigger Mergify
+// This is a test change to trigger Mergify
