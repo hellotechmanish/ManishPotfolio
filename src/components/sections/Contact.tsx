@@ -1,15 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  CheckCircle,
-  AlertCircle,
-} from "lucide-react";
+import { useForm } from "react-hook-form";
+import { Mail, Phone, MapPin, Send, CheckCircle, XCircle } from "lucide-react";
 
-// Mock database data - replace with your actual API calls
 const contactData = {
   title: "Let's Work Together",
   subtitle: "Have a project in mind? I'd love to hear about it.",
@@ -25,37 +18,58 @@ const contactData = {
   },
 };
 
+type FormValues = {
+  name: string;
+  phone: number;
+  email: string;
+  message: string;
+};
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const [apiStatus, setApiStatus] = useState<null | {
+    type: "success" | "error";
+    message: string;
+  }>(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const onSubmit = async (data: FormValues) => {
+    setApiStatus(null); // reset previous messages
 
-    // Simulate API call - replace with your actual submission logic
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-    } catch {
-      // setSubmitStatus("error");
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => setSubmitStatus(null), 5000);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        // API error response
+        setApiStatus({
+          type: "error",
+          message: json.error || "Something went wrong.",
+        });
+        return;
+      }
+
+      // Success
+      setApiStatus({
+        type: "success",
+        message: json.message || "Message sent successfully!",
+      });
+      reset();
+    } catch (error) {
+      setApiStatus({
+        type: "error",
+        message: "Network error. Please try again.",
+      });
     }
   };
 
@@ -65,7 +79,7 @@ export default function Contact() {
       className="py-20 px-6 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
     >
       {/* Background Illustrations */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-10 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-400 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-400 rounded-full blur-2xl"></div>
@@ -161,7 +175,11 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <form className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100" onSubmit={handleSubmit}>
+          <form
+            className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
                 Send a Message
@@ -172,6 +190,7 @@ export default function Contact() {
             </div>
 
             <div className="space-y-6">
+              {/* Name */}
               <div>
                 <label
                   htmlFor="name"
@@ -180,17 +199,50 @@ export default function Contact() {
                   Full Name *
                 </label>
                 <input
-                  type="text"
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  {...register("name", { required: "Name is required" })}
+                  className={`w-full px-4 py-3 border rounded-xl transition-all duration-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.name ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="Your full name"
                 />
+                {errors.name && (
+                  <p className="mt-1 text-red-600 text-sm">
+                    {errors.name.message}
+                  </p>
+                )}
               </div>
 
+              {/* Phone Number */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-semibold text-gray-700 mb-2"
+                >
+                  Phone Number (optional)
+                </label>
+                <input
+                  id="phone"
+                  type="tel"
+                  {...register("phone", {
+                    pattern: {
+                      value: /^\+?[\d\s\-]{7,15}$/,
+                      message: "Please enter a valid phone number",
+                    },
+                  })}
+                  className={`w-full px-4 py-3 border rounded-xl transition-all duration-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.phone ? "border-red-500" : "border-gray-300"
+                  }`}
+                  placeholder="+1 234 567 890"
+                />
+                {errors.phone && (
+                  <p className="mt-1 text-red-600 text-sm">
+                    {errors.phone.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Email */}
               <div>
                 <label
                   htmlFor="email"
@@ -199,17 +251,28 @@ export default function Contact() {
                   Email Address *
                 </label>
                 <input
-                  type="email"
                   id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  type="email"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                      message: "Invalid email address",
+                    },
+                  })}
+                  className={`w-full px-4 py-3 border rounded-xl transition-all duration-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="your.email@example.com"
                 />
+                {errors.email && (
+                  <p className="mt-1 text-red-600 text-sm">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
 
+              {/* Message */}
               <div>
                 <label
                   htmlFor="message"
@@ -219,14 +282,18 @@ export default function Contact() {
                 </label>
                 <textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white resize-none"
+                  {...register("message", { required: "Message is required" })}
+                  className={`w-full px-4 py-3 border rounded-xl transition-all duration-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none ${
+                    errors.message ? "border-red-500" : "border-gray-300"
+                  }`}
                   placeholder="Tell me about your project or how I can help you..."
                 />
+                {errors.message && (
+                  <p className="mt-1 text-red-600 text-sm">
+                    {errors.message.message}
+                  </p>
+                )}
               </div>
 
               {/* Submit Button */}
@@ -249,21 +316,17 @@ export default function Contact() {
               </button>
 
               {/* Status Messages */}
-              {submitStatus === "success" && (
+              {/* Status Messages */}
+              {apiStatus?.type === "success" && (
                 <div className="flex items-center space-x-2 text-green-600 bg-green-50 p-4 rounded-xl border border-green-200">
                   <CheckCircle className="w-5 h-5" />
-                  <span className="font-medium">
-                    Message sent successfully! I&apos;ll get back to you soon.
-                  </span>
+                  <span className="font-medium">{apiStatus.message}</span>
                 </div>
               )}
-
-              {submitStatus === "error" && (
+              {apiStatus?.type === "error" && (
                 <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-4 rounded-xl border border-red-200">
-                  <AlertCircle className="w-5 h-5" />
-                  <span className="font-medium">
-                    Something went wrong. Please try again or email me directly.
-                  </span>
+                  <XCircle className="w-5 h-5" />
+                  <span className="font-medium">{apiStatus.message}</span>
                 </div>
               )}
             </div>
@@ -291,8 +354,8 @@ export default function Contact() {
               Ready to Start Your Project?
             </h3>
             <p className="text-gray-300 mb-6">
-              Let&apos;s discuss your ideas and turn them into reality. No project is
-              too big or too small.
+              Let&apos;s discuss your ideas and turn them into reality. No
+              project is too big or too small.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
@@ -308,7 +371,7 @@ export default function Contact() {
                 Call Now
               </a>
               <a
-                href="https://wa.me/918745072885?text=Hello%20I%20am%20interested"
+                href="https://wa.me/917065942794?text=Hello%20I%20am%20interested"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-colors"
