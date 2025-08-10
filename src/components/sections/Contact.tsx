@@ -88,7 +88,7 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 pb-3 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
             {contactData.title}
           </h2>
           <p className="text-xl text-gray-600 mb-4 max-w-2xl mx-auto">
@@ -120,13 +120,18 @@ export default function Contact() {
             <div className="space-y-6">
               <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-blue-600" />
+                  <Mail className="w-6 h-6 text-blue-600" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-semibold text-gray-900">Email</div>
                   <a
-                    href={`mailto:${contactData.email}`}
+                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                      contactData.email
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-blue-600 hover:text-blue-800 transition-colors"
+                    aria-label={`Send an email to ${contactData.email}`}
                   >
                     {contactData.email}
                   </a>
@@ -359,11 +364,16 @@ export default function Contact() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a
-                href={`mailto:${contactData.email}`}
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                  contactData.email
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-white text-gray-900 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
               >
                 Email Me
               </a>
+
               <a
                 href={`tel:${contactData.phone}`}
                 className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-colors"
