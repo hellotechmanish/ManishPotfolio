@@ -151,7 +151,7 @@ export default function Hero() {
 
           <div className="flex gap-4 justify-center lg:justify-start pt-4">
             <a
-              href="https://github.com/manishkumar"
+              href="https://github.com/hellotechmanish"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-3 bg-white/80 rounded-full shadow-sm border hover:shadow-md hover:scale-110 transition-all duration-300"
