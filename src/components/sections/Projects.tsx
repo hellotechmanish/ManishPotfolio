@@ -126,8 +126,8 @@ export default function Projects() {
 
         {/* Client */}
         <div className="text-sm text-gray-500">
-          <span className="font-medium">Client: </span>
-          <span>{project.client}</span>
+          <span className="font-medium">Worked For: </span>
+          <span>{project.workedFor}</span>
         </div>
       </div>
     </div>
@@ -207,6 +207,7 @@ export default function Projects() {
                   ...project,
                   type: project.type as Project["type"],
                   status: project.status as Project["status"],
+                  workedFor: project.workedFor,
                 }}
               />
             ))}
@@ -292,7 +293,7 @@ export default function Projects() {
               {/* Client */}
               <div className="mb-6">
                 <h4 className="font-semibold text-gray-900 mb-3">Client</h4>
-                <p className="text-gray-600">{selectedProject.client}</p>
+                <p className="text-gray-600">{selectedProject.workedFor}</p>
               </div>
 
               {/* Links */}

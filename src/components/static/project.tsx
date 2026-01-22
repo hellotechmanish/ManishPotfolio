@@ -22,7 +22,7 @@ export interface Project {
   type: ProjectType;
   technologies: string[];
   status: ProjectStatus;
-  client: string;
+  workedFor: string;
   links: ProjectLink;
   featured: boolean;
   awards?: string[];
@@ -71,7 +71,7 @@ export const projectsData = {
       type: "Company Project",
       technologies: ["Next.js", "Node.js", "MongoDB", "Tailwind CSS"],
       status: "Live",
-      client: "Ramyoz Pvt. Ltd.",
+      workedFor: "company",
       links: { live: "https://ramyoz.com/" },
       featured: true,
     },
@@ -87,7 +87,7 @@ export const projectsData = {
       type: "Company Project",
       technologies: ["Next.js", "Node.js", "MongoDB", "Stripe", "AWS"],
       status: "Live",
-      client: "Diginfluencers Pvt. Ltd.",
+      workedFor: "company",
       links: { live: "https://diginfluencers.com/" },
       featured: true,
     },
@@ -103,7 +103,7 @@ export const projectsData = {
       type: "Company Project",
       technologies: ["Next.js", "Node.js", "MongoDB", "TypeScript"],
       status: "Live",
-      client: "Ramyoz Pvt. Ltd.",
+      workedFor: "company",
       links: { live: "https://panel.ramyoz.com/" },
       featured: false,
     },
@@ -119,7 +119,7 @@ export const projectsData = {
       type: "Client Project",
       technologies: ["Next.js", "TypeScript", "Tailwind", "Supabase"],
       status: "Live",
-      client: "TRISHA SINGH INTEGRATED SOLUTIONS PVT. LTD.",
+      workedFor: "client",
       links: {
         live: "https://www.trishas.co.in/",
         github: "https://gitlab.com/hellotechmanish/realesate_enquiry_website",
@@ -137,7 +137,7 @@ export const projectsData = {
       type: "Client Project",
       technologies: ["React", "TypeScript", "Node.js", "MongoDB"],
       status: "Live",
-      client: "Doctor Diagnostic Lab",
+      workedFor: "client",
       links: { live: "https://www.drdiagnosticlab.com/" },
       featured: true,
     },
@@ -152,7 +152,7 @@ export const projectsData = {
       type: "Client Project",
       technologies: ["React", "TypeScript", "Node.js"],
       status: "In Development",
-      client: "AC AMC Client",
+      workedFor: "client",
       links: { github: "https://github.com/helodeepakji/ac_amc_frontend" },
       featured: false,
     },
@@ -168,7 +168,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["Node.js", "Express", "MongoDB", "Gemini API"],
       status: "Live",
-      client: "Personal",
+      workedFor: "Personal",
       links: { live: "https://learnmock.onrender.com/" },
       featured: false,
     },
@@ -183,7 +183,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["Next.js", "TypeScript", "Supabase"],
       status: "In Development",
-      client: "Personal",
+      workedFor: "Personal",
       links: { github: "https://gitlab.com/hellotechmanish/noteswaleybhai" },
       featured: false,
     },
@@ -197,7 +197,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["Next.js", "TypeScript", "Tailwind"],
       status: "Live",
-      client: "Personal",
+      workedFor: "Personal",
       links: { live: "https://my-potfolio-pink.vercel.app/" },
       featured: false,
     },
@@ -211,7 +211,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["Node.js", "Express", "Nodemailer"],
       status: "Live",
-      client: "Personal",
+      workedFor: "Personal",
       links: { github: "https://github.com/hellotechmanish/nodeMailer" },
       featured: false,
     },
@@ -225,7 +225,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["Node.js", "Stripe", "Razorpay"],
       status: "Live",
-      client: "Personal",
+      workedFor: "Personal",
       links: {
         github:
           "https://github.com/hellotechmanish/Payment_gateway_intigration",
@@ -242,7 +242,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["MongoDB", "Express", "React", "Node.js"],
       status: "Live",
-      client: "Personal",
+      workedFor: "Personal",
       links: { github: "https://github.com/hellotechmanish/todolist_mern" },
       featured: false,
     },
@@ -257,7 +257,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["Python", "OpenCV", "Node.js"],
       status: "In Development",
-      client: "Personal",
+      workedFor: "Personal",
       links: {
         github: "https://github.com/hellotechmanish/Biomatric_Attendence",
       },
@@ -274,7 +274,7 @@ export const projectsData = {
       type: "Personal Project",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
       status: "Live",
-      client: "Personal",
+      workedFor: "Personal",
       links: {
         live: "https://smarttoolbox-jade.vercel.app/",
         github: "https://github.com/hellotechmanish/smarttoolbox",
