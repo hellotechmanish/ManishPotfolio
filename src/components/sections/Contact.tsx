@@ -2,19 +2,21 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Mail, Phone, MapPin, Send, CheckCircle, XCircle } from "lucide-react";
+import { contactInfo, socialLinks } from "../static/connect";
 
 const contactData = {
   title: "Let's Work Together",
   subtitle: "Have a project in mind? I'd love to hear about it.",
   description:
     "Whether you need a new website, mobile app, or want to discuss a creative project, I'm here to help bring your ideas to life.",
-  email: "Mk772542@gmail.com",
-  phone: "7065942794",
-  location: "Ghaziabad, Up ,India",
+  email: contactInfo.contact.email,
+  phone: contactInfo.contact.phone,
+  location: contactInfo.location,
   socialLinks: {
-    linkedin: "https://linkedin.com/in/manish",
-    github: "https://github.com/manish",
-    twitter: "https://twitter.com/manish",
+    linkedin: socialLinks[0].url,
+    github: socialLinks[1].url,
+    twitter: socialLinks[2].url,
+    instagram: socialLinks[3].url,
   },
 };
 
@@ -66,6 +68,7 @@ export default function Contact() {
       });
       reset();
     } catch (error) {
+      console.error("Error submitting contact form:", error);
       setApiStatus({
         type: "error",
         message: "Network error. Please try again.",
@@ -126,7 +129,7 @@ export default function Contact() {
                   <div className="font-semibold text-gray-900">Email</div>
                   <a
                     href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-                      contactData.email
+                      contactData.email,
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -365,7 +368,7 @@ export default function Contact() {
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-                  contactData.email
+                  contactData.email,
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
