@@ -175,9 +175,10 @@ export const projectsData = {
     {
       id: 8,
       title: "Noteswaleybhai",
-      description: "Notes sharing platform with user upload feature.",
+      description:
+        "Notes sharing platform with user upload feature. Also provide mock test with ai.",
       longDescription:
-        "Platform for uploading, managing and sharing study notes.",
+        "Platform for uploading, managing and sharing study notes with PYQ this also provide mock test while you uplode the syllabus with the use of ai .",
       image:
         "https://raw.githubusercontent.com/hellotechmanish/Project_image/main/Noteswaleybhai.png",
       type: "Personal Project",
@@ -198,7 +199,7 @@ export const projectsData = {
       technologies: ["Next.js", "TypeScript", "Tailwind"],
       status: "Live",
       workedFor: "Personal",
-      links: { live: "https://my-potfolio-pink.vercel.app/" },
+      links: { live: "https://manishpotfolio.vercel.app/" },
       featured: false,
     },
     {
